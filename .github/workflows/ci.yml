@@ -26,7 +26,7 @@ jobs:
           maven-version: '3.8.8'
 
       - name: Run API Tests with TestNG Suite
-        run: mvn clean test -P api-execution -Dsuite=smokeTesting
+        run: mvn clean test
 
       - name: Upload Test Report
         uses: actions/upload-artifact@v4
