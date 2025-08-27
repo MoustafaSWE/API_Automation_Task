@@ -13,7 +13,15 @@ public class UnifiedReportTearDownTest extends UnifiedReportSetupTest {
     public static void unifiedReportSetup() throws IOException {
         unifiedExtent.flush();
         File unifiedHtmlFile = new File("UnifiedTestResult.html");
-        Desktop.getDesktop().open(unifiedHtmlFile);
+
+        if (!GraphicsEnvironment.isHeadless()) {
+            Desktop.getDesktop().open(unifiedHtmlFile);
+        } else {
+            System.out.println(
+                    "Headless environment detected (CI/CD) → skipping automatic report opening.\n" +
+                            "Report generated at: " + unifiedHtmlFile.getAbsolutePath()
+            );
+        }
     }
 
 }
