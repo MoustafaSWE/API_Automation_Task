@@ -1,0 +1,35 @@
+name: API Automation CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '8'
+
+      - name: Set up Maven
+        uses: stCarolas/setup-maven@v4
+        with:
+          maven-version: '3.8.8'
+
+      - name: Run API Tests with TestNG Suite
+        run: mvn clean test -P api-execution -Dsuite=smokeTesting
+
+      - name: Upload Test Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: UnifiedTestResult
+          path: ./UnifiedTestResult.html
