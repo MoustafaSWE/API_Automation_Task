@@ -23,7 +23,7 @@
         <jackson-databind.version>2.8.7</jackson-databind.version>
         <lombok.version>1.18.32</lombok.version>
 
-        <suite>smokeTesting</suite>
+        <suite>testng</suite>
     </properties>
 
     <build>
